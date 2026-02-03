@@ -31,6 +31,26 @@
 
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#define  MAX_TERRITORIOS  5
+#define  TAM_STRING  50
+
+
+/*
+Este struct serve para a criação dos territorios do jogo
+essa estrutura serve para encapsulamento de variaveis, 
+o que irá nos facilitar a criação de objetos com determinadas propriedades.
+*/
+
+typedef struct {
+	char nomeTerritorio[TAM_STRING];
+	char cor_do_exercito[10];
+	int quantidadeDeTropas;
+} Territorio;
+
+Territorio listaDeExercitos[MAX_TERRITORIOS];
 int main() {
     // 1. Configuração Inicial (Setup):
     // - Define o locale para português.
@@ -39,6 +59,28 @@ int main() {
     // - Preenche os territórios com seus dados iniciais (tropas, donos, etc.).
     // - Define a cor do jogador e sorteia sua missão secreta.
 
+	int i = 0;
+	do {
+		printf("Digite o nome do exercito: ");
+		scanf("%49s", listaDeExercitos[i].nomeTerritorio);
+		printf("Digite a cor do exercito: ");
+		scanf("%9s", listaDeExercitos[i].cor_do_exercito);
+		printf("Digite a quantidade de tropas: ");
+		scanf("%d", &listaDeExercitos[i].quantidadeDeTropas);
+		printf("----------------------------------------\n");
+		i++;
+	} while(i < MAX_TERRITORIOS);
+
+	system("clear");
+	printf("Lista de exercitos:\n");
+	for(int i = 0; i < MAX_TERRITORIOS; i++) {
+
+		printf("Nome do Territorio: %s\n", listaDeExercitos[i].nomeTerritorio);
+		printf("Cor do exercito: %s\n", listaDeExercitos[i].cor_do_exercito);
+		printf("Quantidade de tropas: %d\n", listaDeExercitos[i].quantidadeDeTropas);
+		printf("----------------------------------------\n");
+	}
+    
     // 2. Laço Principal do Jogo (Game Loop):
     // - Roda em um loop 'do-while' que continua até o jogador sair (opção 0) ou vencer.
     // - A cada iteração, exibe o mapa, a missão e o menu de ações.
